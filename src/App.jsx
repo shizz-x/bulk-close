@@ -112,7 +112,7 @@ function App() {
           ).blockhash
         )
       );
-      await sleep(3000);
+      await sleep(6000);
     } else {
       statusSet("Starting from source");
     }
@@ -141,6 +141,8 @@ function App() {
           await sleep(3000);
         }
       }
+      statusSet(`closing accounts...`);
+      await sleep(7000);
 
       const transactions = closer.generateTransactionsForKeyPair(
         walletsWithFunds[i],
@@ -149,7 +151,7 @@ function App() {
       );
 
       const serializedTransactions = transactions.map((t) => t.serialize());
-      statusSet(`closing accounts...`);
+
       for (var k = 0; k < serializedTransactions.length; k++) {
         await closer.confirm(
           await closer.sendRaw(serializedTransactions[k]),
@@ -162,7 +164,8 @@ function App() {
         console.log("done!");
         return;
       }
-      await sleep(3000);
+      await sleep(6000);
+      statusSet(`tranfering sol to the next`);
       await closer.confirm(
         await closer.transferSol(
           sourceWallet,
@@ -174,7 +177,7 @@ function App() {
         )
       );
       sourceWallet = walletsWithFunds[i + 1];
-      await sleep(3000);
+      await sleep(7000);
     }
   };
 
