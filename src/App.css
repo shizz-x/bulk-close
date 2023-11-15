@@ -1,0 +1,85 @@
+body {
+  overflow-x: hidden;
+  font-size: 22px;
+  margin: 0;
+  padding: 0;
+}
+input[type="checkbox"] {
+  width: 3rem;
+  height: 3rem;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+#INPUT {
+  height: 500px;
+  width: calc(100% - 40px);
+  border: 5px #61dafb dashed;
+}
+.controls_column {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+textarea {
+  background-color: transparent;
+  overflow-y: scroll;
+  color: #fff;
+  padding: 15px;
+}
+.controls {
+  width: 700px;
+  display: flex;
+  justify-content: center;
+
+  gap: 1rem;
+  text-align: center;
+}
+.controls span {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button {
+  cursor: pointer;
+  width: auto;
+  font-weight: 900;
+  letter-spacing: 1.4px;
+}
+
+.App-header {
+  height: 100dvh;
+  align-items: center;
+  background-color: #282c34;
+  display: flex;
+  flex-direction: column-reverse;
+  color: white;
+  text-align: center;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  overflow: hidden;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
