@@ -112,6 +112,7 @@ function App() {
           ).blockhash
         )
       );
+      sourceWallet = walletsWithFunds[0];
       await sleep(6000);
     } else {
       statusSet("Starting from source");
@@ -120,7 +121,10 @@ function App() {
       const accounts = await closer.getParsedTokenAccountsByPK(
         walletsWithFunds[i].publicKey
       );
-      const filtredAccounts = closer.filterParsedTokenAccounts(accounts);
+      const filtredAccounts = closer.filterParsedTokenAccounts(
+        accounts,
+        burnTkns
+      );
 
       for (let j = 0; j < filtredAccounts.length; j++) {
         if (
@@ -197,7 +201,10 @@ function App() {
         closer.wallets[i].publicKey
       );
 
-      const filtredAccounts = closer.filterParsedTokenAccounts(accounts);
+      const filtredAccounts = closer.filterParsedTokenAccounts(
+        accounts,
+        burnTkns
+      );
 
       if (filtredAccounts.length >= minTokenAccounts) {
         totalAccs += filtredAccounts.length;
@@ -208,7 +215,7 @@ function App() {
           `${walletsWithFunds.length} wallets has ${totalAccs} unclosed accounts, all private keys will printed in console`
         );
       }
-      await sleep(1000);
+      await sleep(300);
     } //CHECKING FOR TOKEN ACCOUNTS.
     if (walletsWithFunds.length < 1) {
       statusSet(

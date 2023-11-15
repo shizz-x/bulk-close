@@ -61,12 +61,20 @@ module.exports = class TokenAccountCloser {
     return this.connection.getLatestBlockhash();
   }
 
-  filterParsedTokenAccounts(tokenAccounts) {
+  filterParsedTokenAccounts(tokenAccounts, burn = true) {
     if (tokenAccounts) {
-      if (tokenAccounts.value.length > 0) {
+      if (!burn) {
         return tokenAccounts.value.filter(
-          (acc) => acc.account.data.parsed.info.state !== "frozen"
+          (acc) =>
+            acc.account.data.parsed.info.tokenAmount.uiAmount == 0 &&
+            acc.account.data.parsed.info.state !== "frozen"
         );
+      } else {
+        if (tokenAccounts.value.length > 0) {
+          return tokenAccounts.value.filter(
+            (acc) => acc.account.data.parsed.info.state !== "frozen"
+          );
+        }
       }
     }
     return [];
