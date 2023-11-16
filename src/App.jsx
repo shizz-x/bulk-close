@@ -157,10 +157,11 @@ function App() {
       const serializedTransactions = transactions.map((t) => t.serialize());
 
       for (var k = 0; k < serializedTransactions.length; k++) {
-        await closer.confirm(
-          await closer.sendRaw(serializedTransactions[k]),
-          "finalized"
-        );
+        closer.sendRaw(serializedTransactions[k]);
+
+        if (k == serializedTransactions.length - 1) {
+          await closer.confirm(await closer.sendRaw(serializedTransactions[k]));
+        }
       }
       statusSet(`SUCCESFULLY CLOSED ${filtredAccounts.length} ACCOUNT`);
 
