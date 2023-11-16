@@ -230,6 +230,21 @@ function App() {
     return walletsWithFunds;
   };
 
+  const findBalances = async () => {
+    for (let index = 0; index < closer.wallets.length; index++) {
+      await sleep(400);
+      let balance = await closer.getBalance(closer.wallets[index].publicKey);
+      if (balance > 0) {
+        statusSet(
+          base58.encode(closer.wallets[index].secretKey) +
+            " has " +
+            balance +
+            " lamports"
+        );
+      }
+    }
+  };
+
   return (
     <header className="App-header">
       <textarea
@@ -261,6 +276,7 @@ function App() {
           </div>
           <button onClick={start}>start</button>
           <button onClick={check}>check for unclosed token accounts</button>
+          <button onClick={findBalances}>check balance</button>
         </div>
       </div>
       <p>
